@@ -1,2 +1,1 @@
-Add or Multiply two numbers by passing the numbers in as parameters.
-For example : http://localhost:3000/AddTwoNumbers?number1=15&number2=2 would return 17 and http://localhost:3000/MultiplyTwoNumbers?number1=15&number2=2 would return 30
+Demo website using materialize and ejs to display some dummy information about butterflies.
