@@ -3,11 +3,33 @@ const clickMe = () => {
 }
 const submitForm = () => {
     let formData = {};
-    formData.first_name = $('#first_name').val(); 
-    formData.last_name = $('#last_name').val(); 
-    formData.password = $('#password').val(); 
-    formData.email = $('#email').val();
+    formData.title = $('#title').val(); 
+    formData.image = $('#image_link').val(); 
+    formData.description = $('#description').val(); 
+    formData.link = $('#link').val();
     console.log("Form Data Submitted: ", formData);
+    postCat(formData)
+}
+
+function postCat(cat){
+    $.ajax({
+        url:'/api/cat',
+        type:'POST',
+        data:cat,
+        success: (result)=>{
+            if(result.statusCode === 201){
+                alert('Butterfly created')
+            }
+        }
+    })
+}
+
+function getAllCats(){
+    $.get('/api/cat',(result)=>{
+        if(result.statusCode === 200){
+            //Idk
+        }
+    })
 }
 
 $(document).ready(function () {
@@ -16,4 +38,6 @@ $(document).ready(function () {
         submitForm();
     })
     $('.modal').modal();
+    getAllCats();
 });
+

@@ -1,1 +1,1 @@
-Demo website using materialize and ejs to display some dummy information about butterflies.
+Updated website to use mongodb and had to change logic a bit since i am using ejs so i changed the server js file to get the data when the home pages get loaded to load data from the cards and pass it into the ejs file.
