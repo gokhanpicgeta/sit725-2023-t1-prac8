@@ -1,1 +1,1 @@
-Updated website to use mongodb and had to change logic a bit since i am using ejs so i changed the server js file to get the data when the home pages get loaded to load data from the cards and pass it into the ejs file.
+Updated to use MVC Architecture and still using ejs so its slightly diff.
