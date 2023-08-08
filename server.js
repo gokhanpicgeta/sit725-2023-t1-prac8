@@ -2,14 +2,22 @@ var express = require("express")
 var app = express()
 var bodyParser = require('body-parser')
 var port = process.env.port || 3000
-
 app.use(express.static(__dirname + '/'))
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
+
+
+require('./dbConnect')
+let router = require('./routes/router')
+
+
 app.set('views', 'public/views');
 app.set('view engine', 'ejs')
 
 let collection;
+
+app.use('/api/cat',router);
+app.use('/',router);
 
 let cardList = [
     /*{
@@ -34,9 +42,10 @@ let cardList = [
 ]
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://vish:mongopass@774-hd.s722tio.mongodb.net/?retryWrites=true&w=majority";
+//const { MongoClient, ServerApiVersion } = require('mongodb');
+//const uri = "mongodb+srv://vish:mongopass@774-hd.s722tio.mongodb.net/?retryWrites=true&w=majority";
 
+/*
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -45,32 +54,28 @@ const client = new MongoClient(uri, {
   }
 });
 
+*/
 
-
+/*
 async function runDB() {
     try {
-      await client.connect();
+      //await client.connect();
       collection = client.db().collection('Cats');
       //console.log(collection);
     }catch(err){
         console.error(err)
     }
   }
-  
-
-function insertCat(cat,callback){
-    collection.insertOne(cat,callback);
-}
-
+*/
 
 
 app.listen(port,()=>{
     console.log("App listening to : " ,port)
-    runDB().catch(console.dir);
+    //runDB().catch(console.dir);
 })
-
+/*
 app.get('/', (req, res, next) => {
-    getAllCats((err, cards) => {
+    /*getAllCats((err, cards) => {
       if (err) {
         console.error(err);
         return res.status(500).send('Error occurred');
@@ -78,7 +83,8 @@ app.get('/', (req, res, next) => {
       res.render('index', { cards });
     })
   })
-
+*/
+/*
 app.post('/api/cat',(req,res,next) =>{
     let cat = req.body;
     //console.log(cat)
@@ -88,10 +94,6 @@ app.post('/api/cat',(req,res,next) =>{
         }
     })
 })
-
-function getAllCats(callback){
-    collection.find({}).toArray(callback);
-}
 
 app.get('/api/cat',(req,res,next)=>{
     getAllCats((err,result) =>{``
@@ -103,6 +105,21 @@ app.get('/api/cat',(req,res,next)=>{
         }
     })
 })
+*/
+
+/*
+
+function insertCat(cat,callback){
+    collection.insertOne(cat,callback);
+}
+
+
+function getAllCats(callback){
+    collection.find({}).toArray(callback);
+}
+
+*/
+
 
 
 
