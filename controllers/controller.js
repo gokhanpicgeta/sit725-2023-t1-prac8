@@ -20,5 +20,19 @@ function getAllCats(req,res){
     })
 }
 
+//todo deleteCat
 
-module.exports = {postCat,getAllCats}
+function deleteCat(req, res){
+    cat = req.body;
+
+    //console.log(collection)
+
+    collection.deleteCat(cat,(err,result)=>{
+        if(!err){
+            res.json({statusCode:202,data:result,message:'delete success'})
+        }
+    });
+}
+
+
+module.exports = {postCat,getAllCats,deleteCat}
