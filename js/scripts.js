@@ -11,6 +11,13 @@ const submitForm = () => {
     postCat(formData)
 }
 
+
+let socket = io();
+socket.on('number',(message)=>{
+    console.log("The random number is " + message);
+})
+
+
 function postCat(cat){
     $.ajax({
         url:'/api/cat',

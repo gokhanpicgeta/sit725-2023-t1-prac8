@@ -1,23 +1,40 @@
-var express = require("express")
-var app = express()
-var bodyParser = require('body-parser')
-var port = process.env.port || 3000
-app.use(express.static(__dirname + '/'))
+var express = require("express");
+var app = express();
+var bodyParser = require('body-parser');
+var port = process.env.port || 3000;
+app.use(express.static(__dirname + '/'));
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
-require('./dbConnect')
-let router = require('./routes/router')
+require('./dbConnect');
+let router = require('./routes/router');
 
+let http = require('http').createServer(app);
+let io = require('socket.io')(http);
 
 app.set('views', 'public/views');
 app.set('view engine', 'ejs')
+
 
 let collection;
 
 app.use('/api/cat',router);
 app.use('/',router);
+
+
+io.on('connection',(socket) => {
+    console.log('user connected');
+    console.log('disconnect' , ()=> {
+        console.log('user disconnected');
+    })
+    setInterval(()=>{
+
+        socket.emit('number',parseInt(Math.random()*10));
+
+    },1000);
+});
+
 
 let cardList = [
     /*{
@@ -69,7 +86,7 @@ async function runDB() {
 */
 
 
-app.listen(port,()=>{
+http.listen(port,()=>{
     console.log("App listening to : " ,port)
     //runDB().catch(console.dir);
 })

@@ -1,1 +1,1 @@
-Added 1 unit test each for get, post and deleting butterflies.
+Added basic socket funcationality
